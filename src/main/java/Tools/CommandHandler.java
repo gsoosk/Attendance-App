@@ -40,7 +40,7 @@ public class CommandHandler {
         System.out.println("Please enter one of the following command according your desired order\n" +
                 "1 : Getting exams list \n" +
                 "2 : Terminating the system");
-        int inputCommand = in.nextInt();
+        int inputCommand = Integer.valueOf(in.nextLine());
         switch (inputCommand) {
             case 1:
                 myState = SET_EXAM_FOR_ATTENDANCE;
@@ -56,7 +56,7 @@ public class CommandHandler {
     }
     private void setExamForAttendanceStateHandler(){
         System.out.println("Please Enter the examID for attendance.");
-        int examID = in.nextInt();
+        int examID = Integer.valueOf(in.nextLine());
         try {
             attendance.selectExamForAttendance(examID);
             myState = ATTENDANCE;
@@ -66,7 +66,7 @@ public class CommandHandler {
     }
     private void attendStudent(){
         System.out.println("Please Enter the attendance state of the student in this format : <Student_ID> <absent/present>");
-        String inputCommand = in.next();
+        String inputCommand = in.nextLine();
         String[] commandParts = inputCommand.split(" ");
         if(commandParts.length != 2 ) {
             System.out.println("Your input format is not correct.");
@@ -97,7 +97,7 @@ public class CommandHandler {
                 "2 : Terminating the attendance\n" +
                 "3 : Show not evaluated Students list"
                 );
-        int inputCommand = in.nextInt();
+        int inputCommand = Integer.valueOf(in.nextLine());
         switch (inputCommand) {
             case 1:
                 attendStudent();
@@ -120,7 +120,7 @@ public class CommandHandler {
                 "1 : Accenpting attendance\n"  +
                 "2 : Go back to attendance"
                 );
-        int inputCommand = in.nextInt();
+        int inputCommand = Integer.valueOf(in.nextLine());
         switch (inputCommand) {
             case 1:
                 attendance.acceptAttendance();
@@ -137,7 +137,7 @@ public class CommandHandler {
     private void getProfessorAcceptHandler(){
         System.out.println("Please enter professorID for accepring attendance by professor" );
 
-        String inputCommand = in.next();
+        String inputCommand = in.nextLine();
         try {
             attendance.getProfessorAccept(inputCommand);
             attendance.completeAttendance();
