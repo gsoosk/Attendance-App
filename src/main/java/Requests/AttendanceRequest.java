@@ -16,15 +16,15 @@ public class AttendanceRequest {
     }
     public static boolean setPresence(int examId, boolean isTeacherSigned, ArrayList<String> presentStudents){
         try {
-            String data = "{ \"exam_id\" : " + examId + " ,\n" +
+            StringBuilder data = new StringBuilder("{ \"exam_id\" : " + examId + " ,\n" +
                     "\"is_teacher_signed\" : " + (isTeacherSigned ? "true" : "false") + " ,\n" +
-                    "\"present_students_list\" : [";
+                    "\"present_students_list\" : [");
             for (String sid :
                     presentStudents) {
-                data = data + " " + sid + ",";
+                data.append(" ").append(sid).append(",");
             }
-            data += "]\n}";
-            HttpRequest.setRemoteData("api/attendance", data);
+            data.append("]\n}");
+            HttpRequest.setRemoteData("api/attendance", data.toString());
             return true;
         } catch (Exception e){
             return false;
