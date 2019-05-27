@@ -33,6 +33,7 @@ public class Attendance implements AttendanceInterface{
 
     private ArrayList<UTClass> classes;
     private Attendance() {
+        dataToSend = new HashSet<String>();
         ScheduledExecutorService classesScheduler;
         classesScheduler = Executors.newSingleThreadScheduledExecutor();
         classesScheduler.scheduleAtFixedRate(new ClassesScheduler(), 0, 1, TimeUnit.DAYS);

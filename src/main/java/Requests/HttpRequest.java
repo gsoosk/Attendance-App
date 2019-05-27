@@ -39,7 +39,7 @@ public class HttpRequest {
         HttpURLConnection connection = (HttpURLConnection) new URL(baseRemoteURL).openConnection();
 
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/json; utf-8");
+        connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("Accept", "application/json");
         connection.setDoOutput(true);
         OutputStream os = connection.getOutputStream();

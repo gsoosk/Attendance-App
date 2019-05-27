@@ -146,6 +146,7 @@ public class CommandHandler {
             System.out.println("The professorID you entered is not found.");
         }catch (CanNotCompleteAttendance canNotCompleteAttendance){
             System.out.println("Could not send attendance data. System will retry later.");
+            myState = INITIAL;
         }
     }
     public void exec(){

@@ -27,14 +27,14 @@ public class AttendanceRequest {
         }
     }
     public static String getSendingData(int examId, boolean isTeacherSigned, ArrayList<Integer> presentStudents){
-        StringBuilder data = new StringBuilder("{ \"exam_id\": " + examId + " ,\n" +
-                "\"is_teacher_signed\": " + (isTeacherSigned ? "\"true\"": "\"false\"") + " ,\n" +
+        StringBuilder data = new StringBuilder("{ \"exam_id\": " + examId + " ," +
+                "\"is_teacher_signed\": " + (isTeacherSigned ? "\"true\"": "\"false\"") + " ," +
                 "\"present_students_list\": [");
         for (Integer sid :
                 presentStudents) {
             data.append(" ").append(sid).append(",");
         }
-        data.append("]\n}");
+        data.append("]}");
         return data.toString();
     }
 }
