@@ -14,4 +14,12 @@ public class AttendanceRequest {
             e.printStackTrace();
         }
     }
+    public static boolean setPresence(int examId, boolean isTeacherSigned, ArrayList<String> presentStudents){
+        try {
+
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
 }

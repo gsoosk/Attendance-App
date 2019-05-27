@@ -1,9 +1,6 @@
 package Attendance;
 
-import Attendance.Exceptions.ExamNotFound;
-import Attendance.Exceptions.NoExamSelected;
-import Attendance.Exceptions.ProfessorNotFound;
-import Attendance.Exceptions.StudentNotFound;
+import Attendance.Exceptions.*;
 import Data.UTClass;
 
 import java.util.ArrayList;
@@ -15,5 +12,5 @@ public interface AttendanceInterface {
             throws StudentNotFound, NoExamSelected;
     public void acceptAttendance();
     public void getProfessorAccept(String id) throws ProfessorNotFound;
-    public void completeAttendance();
+    public void completeAttendance() throws CanNotCompleteAttendance;
 }
