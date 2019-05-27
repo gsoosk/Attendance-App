@@ -138,6 +138,7 @@ public class Attendance implements AttendanceInterface{
             rebootData();
             throw new CanNotCompleteAttendance();
         }
+
         rebootData();
     }
 }

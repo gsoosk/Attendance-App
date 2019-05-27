@@ -40,15 +40,18 @@ public class CommandHandler {
         System.out.println("Please enter one of the following command according your desired order\n" +
                 "1 : Getting exams list \n" +
                 "2 : Terminating the system");
-        int inputCommand = Integer.valueOf(in.nextLine());
+        int inputCommand = -1;
+        try {
+            inputCommand = Integer.valueOf(in.nextLine());
+        }catch (Exception ignored){}
         switch (inputCommand) {
             case 1:
                 myState = SET_EXAM_FOR_ATTENDANCE;
                 showExamsList();
                 break;
             case 2:
-                myState = State.EXIT_SYSTEM;
-                break;
+                myState = EXIT_SYSTEM;
+                return;
             default:
                 System.out.println("The command you entered is not valid.");
                 break;
@@ -56,7 +59,11 @@ public class CommandHandler {
     }
     private void setExamForAttendanceStateHandler(){
         System.out.println("Please Enter the examID for attendance.");
-        int examID = Integer.valueOf(in.nextLine());
+        int examID = -1;
+        try {
+            examID = Integer.valueOf(in.nextLine());
+        }catch (Exception ignored){}
+
         try {
             attendance.selectExamForAttendance(examID);
             myState = ATTENDANCE;
@@ -97,7 +104,10 @@ public class CommandHandler {
                 "2 : Terminating the attendance\n" +
                 "3 : Show absent Students list"
                 );
-        int inputCommand = Integer.valueOf(in.nextLine());
+        int inputCommand = -1;
+        try {
+            inputCommand = Integer.valueOf(in.nextLine());
+        }catch (Exception ignored){}
         switch (inputCommand) {
             case 1:
                 attendStudent();
@@ -120,7 +130,10 @@ public class CommandHandler {
                 "1 : Accepting attendance\n"  +
                 "2 : Go back to attendance"
                 );
-        int inputCommand = Integer.valueOf(in.nextLine());
+        int inputCommand = -1;
+        try {
+            inputCommand = Integer.valueOf(in.nextLine());
+        }catch (Exception ignored){}
         switch (inputCommand) {
             case 1:
                 attendance.acceptAttendance();
@@ -166,6 +179,8 @@ public class CommandHandler {
                     setExamForAttendanceStateHandler();
                     break;
                 case EXIT_SYSTEM:
+                    System.out.println("Goodbye!");
+                    in.close();
                     return;
                 case ATTENDANCE:
                     attendanceHandler();
