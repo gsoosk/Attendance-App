@@ -80,6 +80,9 @@ public class Attendance implements AttendanceInterface{
     public void attendNewStudent(String studentId, Boolean attendedOrNot) throws StudentNotFound, NoExamSelected {
         if(examForAttendance == null)
             throw new NoExamSelected();
+        if(!attendedOrNot)
+            return;
+
         int sid = Integer.valueOf(studentId);
         for (Student student :
              examForAttendance.getStudents()) {
@@ -89,6 +92,25 @@ public class Attendance implements AttendanceInterface{
             }
         }
         throw new StudentNotFound();
+    }
+
+    public ArrayList<Student> getNotEvaluatedExamStudents() {
+        ArrayList<Student> notEvaluated = new ArrayList<Student>();
+        for (Student student:
+             examForAttendance.getStudents()) {
+            boolean canAdd = true;
+            for (Student presentStudent:
+                 presentStudents) {
+                if(student.getId() == presentStudent.getId()){
+                    canAdd = false;
+                    break;
+                }
+            }
+
+            if(canAdd)
+                notEvaluated.add(student);
+        }
+        return notEvaluated;
     }
 
     public void acceptAttendance(){

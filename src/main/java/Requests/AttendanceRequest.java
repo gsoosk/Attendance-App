@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 public class AttendanceRequest {
     public static AttendanceData getClasses() {
-        String projectsInfo = null;
+        String classesInfo = null;
         AttendanceData attendanceData = new AttendanceData();
         try {
-            projectsInfo = HttpRequest.getRemoteData("api/attendanceData");
-            attendanceData = JSONDecoder.decodeJSONReq(projectsInfo);
+            classesInfo = HttpRequest.getRemoteData("api/attendance");
+            attendanceData = JSONDecoder.decodeJSONReq(classesInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
