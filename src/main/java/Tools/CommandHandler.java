@@ -1,17 +1,17 @@
 package Tools;
 
 import Attendance.Attendance;
-import Attendance.Exceptions.ExamNotFound;
+import Attendance.Exceptions.*;
+import Data.Professor;
 import Data.UTClass;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static Tools.State.INITIAL;
-import static Tools.State.SET_EXAM_FOR_ATTENDANCE;
+import static Tools.State.*;
 
 enum State {
-    INITIAL, SET_EXAM_FOR_ATTENDANCE, EXIT_SYSTEM
+    INITIAL, SET_EXAM_FOR_ATTENDANCE, EXIT_SYSTEM, ATTENDANCE, ACCEPT_ATTENDANCE, GET_PROFESSOT_ACCEPT
         }
 
 public class CommandHandler {
@@ -26,8 +26,8 @@ public class CommandHandler {
     }
     private void initialStateHandler(){
         System.out.println("Please enter one of the following command according your desired order\n " +
-                "1 : For getting exams list \n" +
-                "2 : For terminating");
+                "1 : Getting exams list \n" +
+                "2 : Terminating the system");
         int inputCommand = in.nextInt();
         switch (inputCommand) {
             case 1:
@@ -51,6 +51,79 @@ public class CommandHandler {
             System.out.println("The examID you entered is not valid please enter another examID");
         }
     }
+    private void attendStudent(){
+        System.out.println("Please Enter the attendance state of the student in this format : <Student_ID> <absent/present>");
+        String inputCommand = in.nextLine();
+
+        String commandParts[] = inputCommand.split(" ");
+        if(commandParts.length != 2 ) {
+            System.out.println("Your input format is not correct.");
+            return;
+        }
+        String studentID = commandParts[0];
+        Boolean presence;
+        if(commandParts[1].equals("absent"))
+            presence = false;
+        else if(commandParts[1].equals("present"))
+            presence = true;
+        else {
+            System.out.println("Your input format is not correct.");
+            return;
+        }
+
+        try {
+            attendance.attendNewStudent(studentID, presence);
+        }catch(StudentNotFound studentNotFound){
+            System.out.println("The stududentID you entered does not exist.");
+        }catch (NoExamSelected noExamSelected){
+            noExamSelected.printStackTrace();
+        }
+    }
+    private void attendanceHandler(){
+        System.out.println("Please enter one of the following command according your desired order\n " +
+                "1 : Attending a student \n" +
+                "2 : Terminating the attendance");
+        int inputCommand = in.nextInt();
+        switch (inputCommand) {
+            case 1:
+                attendStudent();
+                break;
+            case 2:
+                myState = ACCEPT_ATTENDANCE;
+                break;
+            default:
+                System.out.println("The command you entered is not valid.");
+                break;
+        }
+    }
+    private void acceptAttendanceHandler(){
+        System.out.println("Please enter one of the following command according your desired order\n " +
+                "1 : Accenpting attendance\n" );
+        int inputCommand = in.nextInt();
+        switch (inputCommand) {
+            case 1:
+                attendance.acceptAttendance();
+                myState = GET_PROFESSOT_ACCEPT;
+                break;
+            default:
+                System.out.println("The command you entered is not valid.");
+                break;
+        }
+    }
+    private void getProfessorAcceptHandler(){
+        System.out.println("Please enter professorID for accepring attendance by professor" );
+
+        String inputCommand = in.nextLine();
+        try {
+            attendance.getProfessorAccept(inputCommand);
+            attendance.completeAttendance();
+            myState = INITIAL;
+        }catch (ProfessorNotFound professorNotFound){
+            System.out.println("The professorID you entered is not found.");
+        }catch (CanNotCompleteAttendance canNotCompleteAttendance){
+            System.out.println("Could not send attendance data. System will retry later.");
+        }
+    }
     public void exec(){
         int inputCommand;
         in = new Scanner(System.in);
@@ -69,9 +142,16 @@ public class CommandHandler {
                     break;
                 case EXIT_SYSTEM:
                     return;
+                case ATTENDANCE:
+                    attendanceHandler();
+                    break;
+                case ACCEPT_ATTENDANCE:
+                    acceptAttendanceHandler();
+                    break;
+                case GET_PROFESSOT_ACCEPT:
+                    getProfessorAcceptHandler();
+                    break;
             }
-
         }
-
     }
 }
