@@ -28,8 +28,11 @@ public class Attendance implements AttendanceInterface{
         return classes;
     }
 
-    public void selectExamForAttendance(String examId) throws ExamNotFound {
-
+    public void selectExamForAttendance(int examId) throws ExamNotFound {
+        for (UTClass utClass:
+             classes) {
+            if(utClass.getExamId() )
+        }
     }
 
 

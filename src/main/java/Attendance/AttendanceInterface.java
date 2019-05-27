@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface AttendanceInterface {
     public ArrayList<UTClass> getExamsList();
-    public void selectExamForAttendance(String examId) throws ExamNotFound;
+    public void selectExamForAttendance(int examId) throws ExamNotFound;
     public void attendNewStudent(String studentId, Boolean attendedOrNot)
             throws StudentNotFound;
     public void acceptAttendance();
