@@ -57,7 +57,7 @@ public class CommandHandler {
         attendance = Attendance.getInstance();
         myState = INITIAL;
 
-        System.out.println("Welcome to Attendance System. :)");
+        System.out.println("Welcome to AttendanceData System. :)");
 
         while(true){
             switch(myState) {

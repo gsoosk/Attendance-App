@@ -26,7 +26,7 @@ public class Attendance implements AttendanceInterface{
     private Boolean presentAcceptance;
     private Professor professorOfExam;
     private void rebootData(){
-        classes = AttendanceRequest.getClasses();
+        classes = AttendanceRequest.getClasses().getClasses();
         examForAttendance = null;
         presentAcceptance = false;
         presentStudents = new ArrayList<Student>();
@@ -53,9 +53,10 @@ public class Attendance implements AttendanceInterface{
     public void attendNewStudent(String studentId, Boolean attendedOrNot) throws StudentNotFound, NoExamSelected {
         if(examForAttendance == null)
             throw new NoExamSelected();
+        int sid = Integer.valueOf(studentId);
         for (Student student :
              examForAttendance.getStudents()) {
-            if(student.getId().equals(studentId)){
+            if(student.getId() == sid){
                 presentStudents.add(student);
                 return;
             }
@@ -76,7 +77,7 @@ public class Attendance implements AttendanceInterface{
     public void completeAttendance()throws CanNotCompleteAttendance {
         int examId = examForAttendance.getExamId();
         boolean isTeacherSigned = ( professorOfExam != null );
-        ArrayList<String> students = new ArrayList<String>();
+        ArrayList<Integer> students = new ArrayList<Integer>();
         for (Student student:
              presentStudents) {
             students.add(student.getId());

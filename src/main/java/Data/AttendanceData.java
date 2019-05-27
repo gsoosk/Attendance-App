@@ -3,7 +3,7 @@ package Data;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Attendance {
+public class AttendanceData {
     private int status;
     private String date;
     private ArrayList <UTClass> classes;

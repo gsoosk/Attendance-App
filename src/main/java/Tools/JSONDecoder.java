@@ -1,6 +1,6 @@
 package Tools;
 
-import Data.Attendance;
+import Data.AttendanceData;
 import Data.Professor;
 import Data.Student;
 import Data.UTClass;
@@ -11,13 +11,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JSONDecoder {
-    static public Attendance decodeJSONReq(String data) throws IOException {
-        Attendance attendance = new Attendance();
+    static public AttendanceData decodeJSONReq(String data) throws IOException {
+        AttendanceData attendanceData = new AttendanceData();
         JSONObject req = new JSONObject(data);
-        attendance.setStatus(req.getInt("status"));
-        attendance.setDate(req.getString("date"));
-        attendance.setClasses(extractClasses(req));
-        return attendance;
+        attendanceData.setStatus(req.getInt("status"));
+        attendanceData.setDate(req.getString("date"));
+        attendanceData.setClasses(extractClasses(req));
+        return attendanceData;
     }
 
     static private ArrayList<UTClass> extractClasses(JSONObject req) {
