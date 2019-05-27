@@ -27,9 +27,9 @@ public class AttendanceRequest {
         }
     }
     public static String getSendingData(int examId, boolean isTeacherSigned, ArrayList<Integer> presentStudents){
-        StringBuilder data = new StringBuilder("{ \"exam_id\" : " + examId + " ,\n" +
-                "\"is_teacher_signed\" : " + (isTeacherSigned ? "true" : "false") + " ,\n" +
-                "\"present_students_list\" : [");
+        StringBuilder data = new StringBuilder("{ \"exam_id\": " + examId + " ,\n" +
+                "\"is_teacher_signed\": " + (isTeacherSigned ? "\"true\"": "\"false\"") + " ,\n" +
+                "\"present_students_list\": [");
         for (Integer sid :
                 presentStudents) {
             data.append(" ").append(sid).append(",");

@@ -116,8 +116,8 @@ public class CommandHandler {
     private void acceptAttendanceHandler(){
         System.out.println("Absent students are:");
         showStudentsList();
-        System.out.println("Please enter one of the following command according your desired order\n " +
-                "1 : Accenpting attendance\n"  +
+        System.out.println("Please enter one of the following command according your desired order\n" +
+                "1 : Accepting attendance\n"  +
                 "2 : Go back to attendance"
                 );
         int inputCommand = Integer.valueOf(in.nextLine());
