@@ -1,9 +1,8 @@
 package Tools;
 
 import Attendance.Attendance;
-import Attendance.Exceptions.ExamNotFound;
-import Attendance.Exceptions.NoExamSelected;
-import Attendance.Exceptions.StudentNotFound;
+import Attendance.Exceptions.*;
+import Data.Professor;
 import Data.UTClass;
 
 import java.util.ArrayList;
@@ -111,6 +110,20 @@ public class CommandHandler {
                 break;
         }
     }
+    private void getProfessorAcceptHandler(){
+        System.out.println("Please enter professorID for accepring attendance by professor" );
+
+        String inputCommand = in.nextLine();
+        try {
+            attendance.getProfessorAccept(inputCommand);
+            attendance.completeAttendance();
+            myState = INITIAL;
+        }catch (ProfessorNotFound professorNotFound){
+            System.out.println("The professorID you entered is not found.");
+        }catch (CanNotCompleteAttendance canNotCompleteAttendance){
+            System.out.println("Could not send attendance data. System will retry later.");
+        }
+    }
     public void exec(){
         int inputCommand;
         in = new Scanner(System.in);
@@ -135,10 +148,10 @@ public class CommandHandler {
                 case ACCEPT_ATTENDANCE:
                     acceptAttendanceHandler();
                     break;
-                case
+                case GET_PROFESSOT_ACCEPT:
+                    getProfessorAcceptHandler();
+                    break;
             }
-
         }
-
     }
 }
