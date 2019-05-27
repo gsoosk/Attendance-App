@@ -67,13 +67,13 @@ public class CommandHandler {
     private void attendStudent(){
         System.out.println("Please Enter the attendance state of the student in this format : <Student_ID> <absent/present>");
         String inputCommand = in.next();
-        String commandParts[] = inputCommand.split(" ");
+        String[] commandParts = inputCommand.split(" ");
         if(commandParts.length != 2 ) {
             System.out.println("Your input format is not correct.");
             return;
         }
         String studentID = commandParts[0];
-        Boolean presence;
+        boolean presence;
         if(commandParts[1].equals("absent"))
             presence = false;
         else if(commandParts[1].equals("present"))
