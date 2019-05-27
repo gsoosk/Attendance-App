@@ -95,7 +95,7 @@ public class CommandHandler {
         System.out.println("Please enter one of the following command according your desired order\n" +
                 "1 : Set a student attendance \n" +
                 "2 : Terminating the attendance\n" +
-                "3 : Show not evaluated Students list"
+                "3 : Show absent Students list"
                 );
         int inputCommand = Integer.valueOf(in.nextLine());
         switch (inputCommand) {
@@ -135,7 +135,7 @@ public class CommandHandler {
         }
     }
     private void getProfessorAcceptHandler(){
-        System.out.println("Please enter professorID for accepring attendance by professor" );
+        System.out.println("Please enter professorID for accepting attendance by professor" );
 
         String inputCommand = in.nextLine();
         try {
