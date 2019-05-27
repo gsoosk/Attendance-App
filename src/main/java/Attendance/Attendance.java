@@ -7,7 +7,6 @@ import Data.UTClass;
 import Requests.AttendanceRequest;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Attendance implements AttendanceInterface{
     private static Attendance ourInstance = new Attendance();
