@@ -12,7 +12,7 @@ import java.util.Scanner;
 import static Tools.State.*;
 
 enum State {
-    INITIAL, SET_EXAM_FOR_ATTENDANCE, EXIT_SYSTEM, ATTENDANCE, ACCEPT_ATTENDANCE,
+    INITIAL, SET_EXAM_FOR_ATTENDANCE, EXIT_SYSTEM, ATTENDANCE, ACCEPT_ATTENDANCE, GET_PROFESSOT_ACCEPT
         }
 
 public class CommandHandler {
@@ -27,8 +27,8 @@ public class CommandHandler {
     }
     private void initialStateHandler(){
         System.out.println("Please enter one of the following command according your desired order\n " +
-                "1 : For getting exams list \n" +
-                "2 : For terminating");
+                "1 : Getting exams list \n" +
+                "2 : Terminating the system");
         int inputCommand = in.nextInt();
         switch (inputCommand) {
             case 1:
@@ -82,8 +82,8 @@ public class CommandHandler {
     }
     private void attendanceHandler(){
         System.out.println("Please enter one of the following command according your desired order\n " +
-                "1 : For Attending a student \n" +
-                "2 : For terminating the attendance");
+                "1 : Attending a student \n" +
+                "2 : Terminating the attendance");
         int inputCommand = in.nextInt();
         switch (inputCommand) {
             case 1:
@@ -96,7 +96,20 @@ public class CommandHandler {
                 System.out.println("The command you entered is not valid.");
                 break;
         }
-
+    }
+    private void acceptAttendanceHandler(){
+        System.out.println("Please enter one of the following command according your desired order\n " +
+                "1 : Accenpting attendance\n" );
+        int inputCommand = in.nextInt();
+        switch (inputCommand) {
+            case 1:
+                attendance.acceptAttendance();
+                myState = GET_PROFESSOT_ACCEPT;
+                break;
+            default:
+                System.out.println("The command you entered is not valid.");
+                break;
+        }
     }
     public void exec(){
         int inputCommand;
@@ -119,7 +132,10 @@ public class CommandHandler {
                 case ATTENDANCE:
                     attendanceHandler();
                     break;
-
+                case ACCEPT_ATTENDANCE:
+                    acceptAttendanceHandler();
+                    break;
+                case
             }
 
         }
