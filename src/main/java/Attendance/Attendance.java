@@ -1,6 +1,7 @@
 package Attendance;
 
 import Attendance.Exceptions.ExamNotFound;
+import Attendance.Exceptions.NoExamSelected;
 import Attendance.Exceptions.ProfessorNotFound;
 import Attendance.Exceptions.StudentNotFound;
 import Data.UTClass;
@@ -31,12 +32,16 @@ public class Attendance implements AttendanceInterface{
     public void selectExamForAttendance(int examId) throws ExamNotFound {
         for (UTClass utClass:
              classes) {
-            if(utClass.getExamId() )
+            if(utClass.getExamId() == examId){
+                examForAttendance = utClass;
+                return;
+            }
         }
+        throw new ExamNotFound();
     }
 
 
-    public void attendNewStudent(String studentId, Boolean attendedOrNot) throws StudentNotFound {
+    public void attendNewStudent(String studentId, Boolean attendedOrNot) throws StudentNotFound, NoExamSelected {
 
     }
 
