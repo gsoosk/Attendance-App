@@ -11,6 +11,16 @@ public class UTClass {
     private Professor professor;
     private ArrayList<Student> students;
 
+    public UTClass(int examId, int roomNumber, String courseName, String startAt, String endAt, Professor professor, ArrayList<Student> students) {
+        this.examId = examId;
+        this.roomNumber = roomNumber;
+        this.courseName = courseName;
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.professor = professor;
+        this.students = students;
+    }
+
     public int getExamId() {
         return examId;
     }

@@ -1,17 +1,20 @@
 package Requests;
 
-import Data.UTClass;
+import Data.Attendance;
+import Tools.JSONDecoder;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class AttendanceRequest {
-    public static void getClasses(){
+    public static Attendance getClasses() throws IOException {
         String projectsInfo = null;
+        Attendance attendance = new Attendance();
         try {
             projectsInfo = HttpRequest.getRemoteData("api/attendance");
-            System.out.println(projectsInfo);
+            attendance = JSONDecoder.decodeJSONReq(projectsInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return attendance;
     }
 }

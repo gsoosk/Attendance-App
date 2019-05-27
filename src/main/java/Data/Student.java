@@ -3,8 +3,15 @@ package Data;
 public class Student {
     private String firstName;
     private String lastName;
-    private String id;
-    private String chairNumber;
+    private int chairNumber;
+    private int id;
+
+    public Student(String firstName, String lastName, int id, int chairNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+        this.chairNumber = chairNumber;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -22,19 +29,17 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getChairNumber() {
+    public int getChairNumber() {
         return chairNumber;
     }
 
-    public void setChairNumber(String chairNumber) {
+    public void setChairNumber(int chairNumber) {
         this.chairNumber = chairNumber;
     }
 }
