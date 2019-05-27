@@ -1,12 +1,18 @@
 package Attendance;
 
 import Attendance.Exceptions.*;
+import Attendance.Schedulers.ClassesScheduler;
+import Attendance.Schedulers.PresenceScheduler;
 import Data.Professor;
 import Data.Student;
 import Data.UTClass;
 import Requests.AttendanceRequest;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Attendance implements AttendanceInterface{
     private static Attendance ourInstance = new Attendance();
@@ -15,9 +21,26 @@ public class Attendance implements AttendanceInterface{
         return ourInstance;
     }
 
+    private HashSet<String> dataToSend;
+
+    public void setDataToSend(HashSet<String> dataToSend) {
+        this.dataToSend = dataToSend;
+    }
+
+    public HashSet<String> getDataToSend() {
+        return dataToSend;
+    }
 
     private ArrayList<UTClass> classes;
     private Attendance() {
+        ScheduledExecutorService classesScheduler;
+        classesScheduler = Executors.newSingleThreadScheduledExecutor();
+        classesScheduler.scheduleAtFixedRate(new ClassesScheduler(), 0, 1, TimeUnit.DAYS);
+
+        ScheduledExecutorService presenceScheduler;
+        presenceScheduler = Executors.newSingleThreadScheduledExecutor();
+        presenceScheduler.scheduleAtFixedRate(new PresenceScheduler(), 0, 5, TimeUnit.MINUTES);
+
         rebootData();
     }
 
@@ -25,8 +48,12 @@ public class Attendance implements AttendanceInterface{
     private ArrayList<Student> presentStudents;
     private Boolean presentAcceptance;
     private Professor professorOfExam;
+
+    public void setClasses(ArrayList<UTClass> classes) {
+        this.classes = classes;
+    }
+
     private void rebootData(){
-        classes = AttendanceRequest.getClasses().getClasses();
         examForAttendance = null;
         presentAcceptance = false;
         presentStudents = new ArrayList<Student>();
@@ -82,8 +109,12 @@ public class Attendance implements AttendanceInterface{
              presentStudents) {
             students.add(student.getId());
         }
-        if(!AttendanceRequest.setPresence(examId, isTeacherSigned, students))
+        String data = AttendanceRequest.getSendingData(examId, isTeacherSigned, students);
+        if(!AttendanceRequest.setPresence(data)) {
+            dataToSend.add(data);
+            rebootData();
             throw new CanNotCompleteAttendance();
+        }
         rebootData();
     }
 }

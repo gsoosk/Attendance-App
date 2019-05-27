@@ -18,20 +18,23 @@ public class AttendanceRequest {
         }
         return attendanceData;
     }
-    public static boolean setPresence(int examId, boolean isTeacherSigned, ArrayList<Integer> presentStudents){
+    public static boolean setPresence(String data){
         try {
-            StringBuilder data = new StringBuilder("{ \"exam_id\" : " + examId + " ,\n" +
-                    "\"is_teacher_signed\" : " + (isTeacherSigned ? "true" : "false") + " ,\n" +
-                    "\"present_students_list\" : [");
-            for (Integer sid :
-                    presentStudents) {
-                data.append(" ").append(sid).append(",");
-            }
-            data.append("]\n}");
-            HttpRequest.setRemoteData("api/attendance", data.toString());
+            HttpRequest.setRemoteData("api/attendance", data);
             return true;
         } catch (Exception e){
             return false;
         }
+    }
+    public static String getSendingData(int examId, boolean isTeacherSigned, ArrayList<Integer> presentStudents){
+        StringBuilder data = new StringBuilder("{ \"exam_id\" : " + examId + " ,\n" +
+                "\"is_teacher_signed\" : " + (isTeacherSigned ? "true" : "false") + " ,\n" +
+                "\"present_students_list\" : [");
+        for (Integer sid :
+                presentStudents) {
+            data.append(" ").append(sid).append(",");
+        }
+        data.append("]\n}");
+        return data.toString();
     }
 }
