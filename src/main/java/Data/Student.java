@@ -1,6 +1,6 @@
 package Data;
 
-public class Student {
+public class Student extends Person{
     private int chairNumber;
     private StudentID studentID;
     private SocialID socialID;

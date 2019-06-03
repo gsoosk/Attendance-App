@@ -1,6 +1,6 @@
 package Data;
 
-public class EducationalAdmin {
+public class EducationalAdmin extends SystemUser{
     private String id;
 
     public EducationalAdmin() {
