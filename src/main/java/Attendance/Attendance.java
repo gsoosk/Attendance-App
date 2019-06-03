@@ -90,7 +90,7 @@ public class Attendance implements AttendanceInterface{
         int sid = Integer.valueOf(studentId);
         for (Student student :
              examForAttendance.getStudents()) {
-            if(Integer.parseInt(student.getStudentID().getId()) == sid){
+            if(student.getId() == sid){
                 presentStudents.add(student);
                 return;
             }
@@ -105,7 +105,7 @@ public class Attendance implements AttendanceInterface{
             boolean canAdd = true;
             for (Student presentStudent:
                  presentStudents) {
-                if(student.getStudentID().getId().equals(presentStudent.getStudentID().getId())){
+                if(student.getStudentID().getId() == presentStudent.getStudentID().getId()){
                     canAdd = false;
                     break;
                 }
@@ -137,7 +137,7 @@ public class Attendance implements AttendanceInterface{
         ArrayList<Integer> students = new ArrayList<Integer>();
         for (Student student:
              presentStudents) {
-            students.add(Integer.parseInt(student.getStudentID().getId()));
+            students.add(student.getStudentID().getId());
         }
         String data = AttendanceRequest.getSendingData(examId, isTeacherSigned, students);
         if(!AttendanceRequest.setPresence(data)) {

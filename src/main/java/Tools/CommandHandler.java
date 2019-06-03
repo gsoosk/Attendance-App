@@ -37,7 +37,7 @@ public class CommandHandler {
         System.out.println();
     }
     private void authenticationHandler(){
-        System.out.println("Please enter your ID\n");
+        System.out.println("Please enter your ID.");
         String inputCommand = "";
         try {
             inputCommand = in.nextLine();
@@ -46,7 +46,7 @@ public class CommandHandler {
             myState = INITIAL;
         }
         else {
-            System.out.println("Invalid ID.\n");
+            System.out.println("Invalid ID.");
         }
     }
     private void initialStateHandler(){
