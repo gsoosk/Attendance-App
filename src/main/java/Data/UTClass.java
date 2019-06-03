@@ -3,62 +3,51 @@ package Data;
 import java.util.ArrayList;
 
 public class UTClass {
-    private int examId;
-    private int roomNumber;
-    private String courseName;
-    private String startAt;
-    private String endAt;
+    private UTClassDate date;
+    private UTClassLocation location;
+    private Course course;
     private Professor professor;
     private ArrayList<Student> students;
 
     public UTClass(int examId, int roomNumber, String courseName, String startAt, String endAt, Professor professor, ArrayList<Student> students) {
-        this.examId = examId;
-        this.roomNumber = roomNumber;
-        this.courseName = courseName;
-        this.startAt = startAt;
-        this.endAt = endAt;
+        this.course = new Course(examId, courseName);
+        this.location = new UTClassLocation();
+        this.location.setRoomNumber(roomNumber);
+        this.date = new UTClassDate();
+        this.date.setStartAt(startAt);
+        this.date.setEndAt(endAt);
         this.professor = professor;
         this.students = students;
     }
 
     public int getExamId() {
-        return examId;
+        return this.course.getExamId();
     }
 
     public void setExamId(int examId) {
-        this.examId = examId;
+        this.course.setExamId(examId);
     }
 
-    public int getRoomNumber() {
-        return roomNumber;
+
+    public UTClassLocation getLocation() {
+        return location;
     }
 
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
+    public void setLocation(UTClassLocation location) {
+        this.location = location;
     }
 
     public String getCourseName() {
-        return courseName;
+        return this.course.getCourseName();
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+
+    public UTClassDate getDate() {
+        return date;
     }
 
-    public String getStartAt() {
-        return startAt;
-    }
-
-    public void setStartAt(String startAt) {
-        this.startAt = startAt;
-    }
-
-    public String getEndAt() {
-        return endAt;
-    }
-
-    public void setEndAt(String endAt) {
-        this.endAt = endAt;
+    public void setDate(UTClassDate date) {
+        this.date = date;
     }
 
     public Professor getProfessor() {
