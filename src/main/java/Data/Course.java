@@ -3,7 +3,7 @@ package Data;
 public class Course {
     private MainCourse mainCourse;
     private int examId;
-    Course(int id, String courseName)
+    public Course(int id, String courseName)
     {
         mainCourse = new MainCourse();
         mainCourse.setName(courseName);

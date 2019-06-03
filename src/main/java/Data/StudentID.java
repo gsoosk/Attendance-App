@@ -3,10 +3,10 @@ package Data;
 public class StudentID {
     private String firstName;
     private String lastName;
-    private String id;
+    private int id;
     private String imageLink;
 
-    public StudentID(String firstName, String lastName, String id) {
+    public StudentID(String firstName, String lastName, int id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
@@ -28,11 +28,11 @@ public class StudentID {
         this.lastName = lastName;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

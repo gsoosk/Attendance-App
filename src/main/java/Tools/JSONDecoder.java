@@ -33,22 +33,23 @@ public class JSONDecoder {
         String startAt = info.getString("start_at");
         String endAt = info.getString("end_at");
         Professor professor = decodeJSONToProfessor(info.getJSONObject("professor"));
-        ArrayList<Student> students = decodeJSONToStudents(info.getJSONArray("students"));
+        ArrayList<Student> students = decodeJSONToStudents(info.getJSONArray("students"), courseName, examId);
 
         return new UTClass(examId, roomNumber, courseName, startAt, endAt, professor, students);
     }
 
-    private static ArrayList<Student> decodeJSONToStudents(JSONArray info) {
+    private static ArrayList<Student> decodeJSONToStudents(JSONArray info, String courseName, int examId) {
         ArrayList <Student> students = new ArrayList<Student>();
+        Course course = new Course(examId, courseName);
         for(int i = 0; i < info.length(); i++) {
             JSONObject newInfo = info.getJSONObject(i);
             String firstName = newInfo.getString("first_name");
             String lastName = newInfo.getString("last_name");
             int id = newInfo.getInt("id");
             SocialID socialID = new SocialID(firstName, lastName, "");
-            StudentID studentID = new StudentID(firstName, lastName, String.valueOf(id));
+            StudentID studentID = new StudentID(firstName, lastName, id);
             int chairNumber = newInfo.getInt("chair_number");
-            students.add(new Student(studentID, socialID, chairNumber));
+            students.add(new Student(studentID, socialID, chairNumber, course));
         }
         return students;
     }
