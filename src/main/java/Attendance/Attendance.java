@@ -84,14 +84,13 @@ public class Attendance implements AttendanceInterface{
     public void attendNewStudent(String studentId, Boolean attendedOrNot) throws StudentNotFound, NoExamSelected {
         if(examForAttendance == null)
             throw new NoExamSelected();
-        if(!attendedOrNot)
-            return;
 
         int sid = Integer.valueOf(studentId);
         for (Student student :
              examForAttendance.getStudents()) {
             if(student.getId() == sid){
-                presentStudents.add(student);
+                if(attendedOrNot)
+                    presentStudents.add(student);
                 return;
             }
         }
