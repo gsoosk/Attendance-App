@@ -106,7 +106,7 @@ public class CommandHandler {
         try {
             attendance.attendNewStudent(studentID, presence);
         }catch(StudentNotFound studentNotFound){
-            System.out.println("The stududentID you entered does not exist.");
+            System.out.println("The studentID you entered does not exist.");
         }catch (NoExamSelected noExamSelected){
             noExamSelected.printStackTrace();
         }
