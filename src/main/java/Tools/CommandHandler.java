@@ -12,7 +12,7 @@ import java.util.Scanner;
 import static Tools.State.*;
 
 enum State {
-    INITIAL, SET_EXAM_FOR_ATTENDANCE, EXIT_SYSTEM, ATTENDANCE, ACCEPT_ATTENDANCE, GET_PROFESSOT_ACCEPT
+    LOGIN, INITIAL, SET_EXAM_FOR_ATTENDANCE, EXIT_SYSTEM, ATTENDANCE, ACCEPT_ATTENDANCE, GET_PROFESSOT_ACCEPT
         }
 
 public class CommandHandler {
@@ -31,10 +31,23 @@ public class CommandHandler {
         ArrayList<Student> list = attendance.getNotEvaluatedExamStudents();
         for (Student student:
                 list) {
-            System.out.println("student name : " + student.getFirstName() + student.getLastName() +
-                    " | id : " + student.getId());
+            System.out.println("student name : " + student.getStudentID().getFirstName() + student.getStudentID().getLastName() +
+                    " | id : " + student.getStudentID().getId());
         }
         System.out.println();
+    }
+    private void authenticationHandler(){
+        System.out.println("Please enter your ID\n");
+        String inputCommand = "";
+        try {
+            inputCommand = in.nextLine();
+        }catch (Exception ignored){}
+        if(inputCommand.equals(attendance.getEducationalAdmin().getId())) {
+            myState = INITIAL;
+        }
+        else {
+            System.out.println("Invalid ID.\n");
+        }
     }
     private void initialStateHandler(){
         System.out.println("Please enter one of the following command according your desired order\n" +
@@ -166,12 +179,15 @@ public class CommandHandler {
         int inputCommand;
         in = new Scanner(System.in);
         attendance = Attendance.getInstance();
-        myState = INITIAL;
+        myState = LOGIN;
 
         System.out.println("Welcome to AttendanceData System. :)");
 
         while(true){
             switch(myState) {
+                case LOGIN:
+                    authenticationHandler();
+                    break;
                 case INITIAL:
                     initialStateHandler();
                     break;

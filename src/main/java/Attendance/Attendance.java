@@ -3,6 +3,7 @@ package Attendance;
 import Attendance.Exceptions.*;
 import Attendance.Schedulers.ClassesScheduler;
 import Attendance.Schedulers.PresenceScheduler;
+import Data.EducationalAdmin;
 import Data.Professor;
 import Data.Student;
 import Data.UTClass;
@@ -16,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Attendance implements AttendanceInterface{
     private static Attendance ourInstance = new Attendance();
+
+    private static EducationalAdmin educationalAdmin = new EducationalAdmin();
 
     public static Attendance getInstance() {
         return ourInstance;
@@ -87,7 +90,7 @@ public class Attendance implements AttendanceInterface{
         int sid = Integer.valueOf(studentId);
         for (Student student :
              examForAttendance.getStudents()) {
-            if(student.getId() == sid){
+            if(Integer.parseInt(student.getStudentID().getId()) == sid){
                 presentStudents.add(student);
                 return;
             }
@@ -102,7 +105,7 @@ public class Attendance implements AttendanceInterface{
             boolean canAdd = true;
             for (Student presentStudent:
                  presentStudents) {
-                if(student.getId() == presentStudent.getId()){
+                if(student.getStudentID().getId().equals(presentStudent.getStudentID().getId())){
                     canAdd = false;
                     break;
                 }
@@ -112,6 +115,10 @@ public class Attendance implements AttendanceInterface{
                 notEvaluated.add(student);
         }
         return notEvaluated;
+    }
+
+    public EducationalAdmin getEducationalAdmin() {
+        return educationalAdmin;
     }
 
     public void acceptAttendance(){
@@ -130,7 +137,7 @@ public class Attendance implements AttendanceInterface{
         ArrayList<Integer> students = new ArrayList<Integer>();
         for (Student student:
              presentStudents) {
-            students.add(student.getId());
+            students.add(Integer.parseInt(student.getStudentID().getId()));
         }
         String data = AttendanceRequest.getSendingData(examId, isTeacherSigned, students);
         if(!AttendanceRequest.setPresence(data)) {
