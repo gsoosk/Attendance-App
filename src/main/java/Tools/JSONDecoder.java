@@ -1,9 +1,6 @@
 package Tools;
 
-import Data.AttendanceData;
-import Data.Professor;
-import Data.Student;
-import Data.UTClass;
+import Data.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -48,8 +45,10 @@ public class JSONDecoder {
             String firstName = newInfo.getString("first_name");
             String lastName = newInfo.getString("last_name");
             int id = newInfo.getInt("id");
+            SocialID socialID = new SocialID(firstName, lastName, "");
+            StudentID studentID = new StudentID(firstName, lastName, String.valueOf(id));
             int chairNumber = newInfo.getInt("chair_number");
-            students.add(new Student(firstName, lastName, id, chairNumber));
+            students.add(new Student(studentID, socialID, chairNumber));
         }
         return students;
     }

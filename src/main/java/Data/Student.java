@@ -1,38 +1,22 @@
 package Data;
 
 public class Student {
-    private String firstName;
-    private String lastName;
     private int chairNumber;
-    private int id;
+    private StudentID studentID;
+    private SocialID socialID;
 
-    public Student(String firstName, String lastName, int id, int chairNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.id = id;
+    public Student(StudentID studentID, SocialID socialID, int chairNumber) {
+        this.studentID = studentID;
         this.chairNumber = chairNumber;
+        this.socialID = socialID;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public StudentID getStudentID() {
+        return studentID;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getId() { return id; }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setStudentID(StudentID studentID) {
+        this.studentID = studentID;
     }
 
     public int getChairNumber() {
@@ -41,5 +25,13 @@ public class Student {
 
     public void setChairNumber(int chairNumber) {
         this.chairNumber = chairNumber;
+    }
+
+    public SocialID getSocialID() {
+        return socialID;
+    }
+
+    public void setSocialID(SocialID socialID) {
+        this.socialID = socialID;
     }
 }
