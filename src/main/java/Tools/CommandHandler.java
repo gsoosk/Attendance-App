@@ -125,14 +125,14 @@ public class CommandHandler {
         }catch(StudentNotFound studentNotFound){
             System.out.println("The studentID you entered does not exist.\n" +
                     "If you want to add this student to list entr '1' otherwise enter'0'");
-            int inputCommand = -1;
+            int inputCommandInt = -1;
             try {
-                inputCommand = Integer.valueOf(in.nextLine());
+                inputCommandInt = Integer.valueOf(in.nextLine());
             }catch (Exception ignored){}
-            switch (inputCommand){
-                case1:
+            switch (inputCommandInt){
+                case 1:
                     addNewStudent(Boolean presence);
-                case0:
+                case 0:
                     break;
                 default:
                     System.out.println("The command you entered is not valid.");
