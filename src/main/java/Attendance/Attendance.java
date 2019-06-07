@@ -3,10 +3,7 @@ package Attendance;
 import Attendance.Exceptions.*;
 import Attendance.Schedulers.ClassesScheduler;
 import Attendance.Schedulers.PresenceScheduler;
-import Data.EducationalAdmin;
-import Data.Professor;
-import Data.Student;
-import Data.UTClass;
+import Data.*;
 import Requests.AttendanceRequest;
 
 import java.util.ArrayList;
@@ -83,9 +80,9 @@ public class Attendance implements AttendanceInterface{
     public void addNewStudentToList(String firstName, String lastName, int id, String ssn, int chairNumber, Boolean attendedOrNot){
         StudentID sid = new StudentID(firstName, lastName, id);
         SocialID socid = new SocialID(firstName, lastName, ssn);
-        Student newStudent = new Student(studentID, socialID, chairNumber);
+        Student newStudent = new Student(sid, socid, chairNumber);
         if(attendedOrNot)
-            presentStudents.add(student);
+            presentStudents.add(newStudent);
     }
 
 
@@ -123,6 +120,8 @@ public class Attendance implements AttendanceInterface{
         }
         return notEvaluated;
     }
+
+    public ArrayList<Student> getPresentStudents() { return presentStudents; }
 
     public EducationalAdmin getEducationalAdmin() {
         return educationalAdmin;
