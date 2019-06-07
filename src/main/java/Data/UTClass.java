@@ -41,6 +41,7 @@ public class UTClass {
         return this.course.getCourseName();
     }
 
+    public Course getCourse() { return course; }
 
     public UTClassDate getDate() {
         return date;

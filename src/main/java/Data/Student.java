@@ -4,22 +4,13 @@ public class Student extends Person{
     private int chairNumber;
     private StudentID studentID;
     private SocialID socialID;
-    private Course course;
 
-    public Student(StudentID studentID, SocialID socialID, int chairNumber, Course course) {
+    public Student(StudentID studentID, SocialID socialID, int chairNumber) {
         this.studentID = studentID;
         this.chairNumber = chairNumber;
         this.socialID = socialID;
-        this.course = course;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
 
     public StudentID getStudentID() {
         return studentID;

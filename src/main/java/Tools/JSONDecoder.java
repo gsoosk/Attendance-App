@@ -49,7 +49,7 @@ public class JSONDecoder {
             SocialID socialID = new SocialID(firstName, lastName, "");
             StudentID studentID = new StudentID(firstName, lastName, id);
             int chairNumber = newInfo.getInt("chair_number");
-            students.add(new Student(studentID, socialID, chairNumber, course));
+            students.add(new Student(studentID, socialID, chairNumber));
         }
         return students;
     }

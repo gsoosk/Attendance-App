@@ -84,6 +84,23 @@ public class CommandHandler {
             System.out.println("The examID you entered is not valid please enter another examID");
         }
     }
+
+    private void addNewStudent(Boolean presence){
+        System.out.println("Please Enter the information of student in this format : <first_name> <last_name> <student_id> <social_id> <chair_number>");
+        String inputCommand = in.nextLine();
+        String[] commandParts = inputCommand.split(" ");
+        if(commandParts.length != 5 ) {
+            System.out.println("Your input format is not correct.");
+            return;
+        }
+        String firstName = commandParts[0];
+        String lastName = commandParts[1];
+        int id = Integer.valueOf(commandParts[2]);
+        String ssn = commandParts[3];
+        int chairNumber = Integer.valueOf(commandParts[4]);
+        attendance.addNewStudentToList(firstName, lastName, id, ssn, chairNumber, presence);
+    }
+
     private void attendStudent(){
         System.out.println("Please Enter the attendance state of the student in this format : <Student_ID> <absent/present>");
         String inputCommand = in.nextLine();
@@ -106,7 +123,21 @@ public class CommandHandler {
         try {
             attendance.attendNewStudent(studentID, presence);
         }catch(StudentNotFound studentNotFound){
-            System.out.println("The studentID you entered does not exist.");
+            System.out.println("The studentID you entered does not exist.\n" +
+                    "If you want to add this student to list entr '1' otherwise enter'0'");
+            int inputCommand = -1;
+            try {
+                inputCommand = Integer.valueOf(in.nextLine());
+            }catch (Exception ignored){}
+            switch (inputCommand){
+                case1:
+                    addNewStudent(Boolean presence);
+                case0:
+                    break;
+                default:
+                    System.out.println("The command you entered is not valid.");
+                    break;
+            }
         }catch (NoExamSelected noExamSelected){
             noExamSelected.printStackTrace();
         }

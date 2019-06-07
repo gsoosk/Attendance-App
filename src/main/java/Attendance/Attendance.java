@@ -80,6 +80,14 @@ public class Attendance implements AttendanceInterface{
         throw new ExamNotFound();
     }
 
+    public void addNewStudentToList(String firstName, String lastName, int id, String ssn, int chairNumber, Boolean attendedOrNot){
+        StudentID sid = new StudentID(firstName, lastName, id);
+        SocialID socid = new SocialID(firstName, lastName, ssn);
+        Student newStudent = new Student(studentID, socialID, chairNumber);
+        if(attendedOrNot)
+            presentStudents.add(student);
+    }
+
 
     public void attendNewStudent(String studentId, Boolean attendedOrNot) throws StudentNotFound, NoExamSelected {
         if(examForAttendance == null)
