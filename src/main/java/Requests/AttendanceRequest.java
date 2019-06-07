@@ -30,9 +30,10 @@ public class AttendanceRequest {
         StringBuilder data = new StringBuilder("{ \"exam_id\": " + examId + " ," +
                 "\"is_teacher_signed\": " + (isTeacherSigned ? "\"true\"": "\"false\"") + " ," +
                 "\"present_students_list\": [");
-        for (Integer sid :
-                presentStudents) {
-            data.append(" ").append(sid).append(",");
+        for (int i = 0; i < presentStudents.size(); i++) {
+            data.append(" ").append(presentStudents.get(i));
+            if(i != presentStudents.size() -1)
+                data.append(",");
         }
         data.append("]}");
         return data.toString();
